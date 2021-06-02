@@ -1,4 +1,5 @@
 import React from "react";
+import { StatusBar } from 'expo-status-bar';
 import { Alert } from "react-native"
 import Loading from "./Loading"
 import Weather from "./Weather"
@@ -19,6 +20,7 @@ export default class extends React.Component {
     );
     this.setState({
       isLoading : false,
+      condition : data.weather[0].main,
       temp: data.main.temp,
     });
   }
@@ -40,7 +42,7 @@ export default class extends React.Component {
 
 
   render(){
-    const { isLoading, temp }= this.state;
-    return isLoading ? <Loading /> : <Weather temp={Math.round(temp)}/>;
+    const { isLoading, temp, condition }= this.state;
+    return isLoading ? <Loading /> : <Weather temp={Math.round(temp)} condition={condition}/>;
   }
 }
